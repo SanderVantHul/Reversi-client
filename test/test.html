@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine/jasmine.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  <script type="text/javascript" src="jasmine/lib/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="jasmine/lib/jasmine/jasmine-html.js"></script>
+  <script type="text/javascript" src="jasmine/lib/jasmine/boot.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+
+  <script src="/js/feedbackWidget.js"></script>
+  <script src="/js/game.js"></script>
+
+</head>
+
+<body>
+
+  <div id="feedback-success" style="display:none"></div>
+
+  <script>
+    describe("FeedbackWidget", () => {
+      it("Method hide() hides feedback widget", () => {
+        //arrange
+        let successWidget = new FeedbackWidget("feedback-success");
+
+        //act
+        successWidget.show();
+        successWidget.hide();
+
+        //assert
+        const element = $("#feedback-success");
+        expect(element).toBeDefined();
+        expect(element.attr('style')).toBe('display: none;');
+      });
+    });
+
+
+    describe("A suite", function () {
+      it("contains spec with an expectation", function () {
+        expect(true).toBe(true);
+      });
+    });
+
+    describe("Application initialisation", function () {
+      it("Method init returns true", function () {
+        const result = myApp.init();
+        expect(result).toBe(true);
+      });
+    });
+
+    beforeAll(function (done) {
+      $(function () {
+        done();
+      });
+    });
+
+
+
+    describe("Game", () => {
+      it("Game object available in global scope", () => {
+        //arrange
+        //act
+        //assert
+        expect(Game).toBeDefined();
+      });
+    });
+
+    describe("Game", () => {
+      it("Method init() available", () => {
+        //arrange
+        //act
+        //assert
+        expect(typeof Game.init).toBe("function");
+      });
+    });
+
+    describe("Game", () => {
+      it("Method init() available in Game.Reversi", () => {
+        //arrange
+        //act
+        //assert
+        expect(typeof Game.Reversi.init).toBe("function");
+      });
+    });
+
+    describe("Game", () => {
+      it("Method init() available in Game.Model", () => {
+        //arrange
+        //act
+        //assert
+        expect(typeof Game.Model.init).toBe("function");
+      });
+    });
+
+    describe("Game", () => {
+      it("Method init() available in Game.Data", () => {
+        //arrange
+        //act
+        //assert
+        expect(typeof Game.Data.init).toBe("function");
+      });
+    });
+
+  </script>
+
+
+</body>
+
+</html>

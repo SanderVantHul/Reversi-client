@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript getting started</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/feedbackwidget.css" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!-- Code 'n stuff -->
+    <script src="js/feedbackWidget.js"></script>
+    <script src="js/game.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function () {
+            Game.init(afterInit);
+        });
+
+        function afterInit() {
+            //Game.Model.getWeather();
+            //Game.Data.get("api/Spel/Beurt");
+        }
+    </script>
+
+    <button id="ok">OK</button>
+
+    <section class="widget widget-hidden widget-success widget-fade-in" id="feedback-success">
+        <figure class="widget__vinkje">
+            <img class="widget__vinkje__img" src="assets/feedbackwidget/checkmark.png">
+        </figure>
+        <div class="widget__bericht">
+            <p class="widget__bericht__text"></p>
+        </div>
+        <figure class="widget__kruisje">
+            <input type="image" id="close" src="assets/feedbackwidget/cancel.png" />
+        </figure>
+        <button class="widget__button widget__accepteer bibber">Accepteren</button>
+        <button class="widget__button widget__weiger">Weigeren</button>
+    </section>
+
+    <section id="feedback-danger" style="display:none"></section>
+
+</body>
+
+</html>
