@@ -30,10 +30,9 @@ var FeedbackWidget = /*#__PURE__*/function () {
   }, {
     key: "show",
     value: function show(message, type) {
-      $("#".concat(this._elementId)).text(message);
-      var x = document.getElementById(this._elementId);
-      x.className = "alert alert-".concat(type);
-      x.style.display = "block";
+      document.getElementsByClassName("widget__bericht__text")[0].innerHTML = message;
+      $("#".concat(this._elementId)).removeClass("widget-hidden");
+      $("#".concat(this._elementId)).addClass("widget-show");
       this.log({
         message: message,
         type: type
@@ -42,8 +41,8 @@ var FeedbackWidget = /*#__PURE__*/function () {
   }, {
     key: "hide",
     value: function hide() {
-      var x = document.getElementById(this._elementId);
-      x.style.display = "none";
+      $("#".concat(this._elementId)).removeClass("widget-show");
+      $("#".concat(this._elementId)).addClass("widget-hidden");
     }
   }, {
     key: "log",
@@ -78,6 +77,17 @@ var FeedbackWidget = /*#__PURE__*/function () {
   return FeedbackWidget;
 }();
 
+$(function () {
+  var feedback = new FeedbackWidget("feedback-success");
+  $("#ok").on("click", function () {
+    //alert("The button was clicked.");
+    feedback.show("Speler wil deelnemen aan jouw spel. Geef akkoord.", "success"); //feedback.history();
+  });
+  $("#close").on("click", function () {
+    feedback.hide();
+  });
+});
+
 var Game = function (url) {
   //Configuratie en state waarden
   var _configMap = {
@@ -98,6 +108,7 @@ var Game = function (url) {
   var _init = function _init(afterInit) {
     _getCurrentGameState();
 
+    Game.Reversi.init();
     afterInit();
   };
 
@@ -110,7 +121,46 @@ Game.Reversi = function () {
   var _configMap = {};
 
   var _init = function _init() {
-    console.log(_configMap.apiUrl);
+    _makeBoard();
+  };
+
+  var _makeBoard = function _makeBoard() {
+    var board = document.getElementsByClassName("board")[0]; // tiles toevoegen aan bord
+
+    for (var row = 1; row < 9; row++) {
+      for (var column = 1; column < 9; column++) {
+        var tile = document.createElement("div");
+        $(tile).addClass('tile');
+        tile.style.gridArea = "r".concat(row, "-c").concat(column);
+        board.appendChild(tile);
+      }
+
+      ;
+    }
+
+    ; // nummers en letters toevoegen aan bord
+
+    for (var _row = 0; _row < 9; _row++) {
+      for (var _column = 0; _column < 8; _column++) {
+        // nummers
+        if (_row == 0) {
+          var number = document.createElement("div");
+          $(number).addClass('number');
+          number.innerHTML = "".concat(_column + 1);
+          number.style.gridArea = "r".concat(_row, "-c").concat(_column + 1);
+          board.appendChild(number);
+        } // letters
+        else if (_column == 0) {
+          var _number = document.createElement("div");
+
+          $(_number).addClass('number');
+          _number.innerHTML = "".concat(String.fromCharCode(64 + _row)); // ascii code
+
+          _number.style.gridArea = "r".concat(_row, "-c").concat(_column);
+          board.appendChild(_number);
+        }
+      }
+    }
   };
 
   return {
@@ -136,6 +186,7 @@ Game.Data = function () {
     }
 
     this._stateMap.environment = environment;
+    this.get(url);
   };
 
   var _getMockData = function _getMockData(url) {

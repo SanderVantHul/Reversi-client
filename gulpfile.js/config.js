@@ -1,5 +1,5 @@
 module.exports = {
-    localServerProjectPath : 'C:/Users/Sander/source/repos/ReversiWebApi/ReversiWebApi/clienttest/',
+    localServerProjectPath : 'C:/Users/Sander/source/repos/ReversiMvcApp/ReversiMvcApp/wwwroot/',
     files: {
         js: [
             'js/**/*.js',
@@ -9,6 +9,18 @@ module.exports = {
             'game.js',
             'feedbackWidget.js'
         ],
+        sass: [
+            './css/*.scss',
+            './css/*.css',
+        ], 
+        sassOrder: [
+            'board.scss',
+            'fiche.scss',
+            'feedbackwidget.css',
+        ],
+        html: [
+            './*.html'
+        ]
     },
     voornaam: 'Sander'
 };

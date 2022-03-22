@@ -17,6 +17,7 @@ const Game = ((url) => {
 
     const _init = function (afterInit) {
         _getCurrentGameState();
+        Game.Reversi.init();
         afterInit();
     };
 
@@ -30,7 +31,43 @@ Game.Reversi = (() => {
     };
 
     const _init = function () {
-        console.log(_configMap.apiUrl);
+        _makeBoard();
+    };
+
+    const _makeBoard = function () {
+        const board = document.getElementsByClassName("board")[0];
+
+        // tiles toevoegen aan bord
+        for (let row = 1; row < 9; row++) {
+            for (let column = 1; column < 9; column++) {
+                let tile = document.createElement("div");
+                $(tile).addClass('tile');
+                tile.style.gridArea = `r${row}-c${column}`;
+                board.appendChild(tile);
+            };
+        };
+
+        // nummers en letters toevoegen aan bord
+        for (let row = 0; row < 9; row++) {
+            for (let column = 0; column < 8; column++) {
+                // nummers
+                if (row == 0) {
+                    let number = document.createElement("div");
+                    $(number).addClass('number');
+                    number.innerHTML = `${column + 1}`;
+                    number.style.gridArea = `r${row}-c${column + 1}`;
+                    board.appendChild(number);
+                } 
+                // letters
+                else if (column == 0) {
+                    let number = document.createElement("div");
+                    $(number).addClass('number');
+                    number.innerHTML = `${String.fromCharCode(64 + row)}`; // ascii code
+                    number.style.gridArea = `r${row}-c${column}`;
+                    board.appendChild(number);
+                }
+            }
+        }
     };
 
     return {

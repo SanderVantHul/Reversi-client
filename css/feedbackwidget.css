@@ -62,7 +62,7 @@
 
 .widget__kruisje:hover {
     background: #3c763d;
-    transform: scale(1.1) perspective(1px)
+    transform: scale(1.1) perspective(1px);
 }
 
 #close {
@@ -134,8 +134,8 @@
         display: block;
     }
     .widget {
-        grid-template-areas: 
-            "vinkje bericht kruisje kruisje"
+        grid-template-areas: /* elke rij heeft zelfde aantal columns */
+            "vinkje bericht kruisje kruisje" 
             "vinkje bericht accepteer weiger";
     }
 }
