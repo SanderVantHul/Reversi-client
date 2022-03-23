@@ -43,6 +43,7 @@ Game.Reversi = (() => {
                 let tile = document.createElement("div");
                 $(tile).addClass('tile');
                 tile.style.gridArea = `r${row}-c${column}`;
+                $(tile).click(function () { _placeChip(tile); });
                 board.appendChild(tile);
             };
         };
@@ -50,24 +51,28 @@ Game.Reversi = (() => {
         // nummers en letters toevoegen aan bord
         for (let row = 0; row < 9; row++) {
             for (let column = 0; column < 8; column++) {
+                const number = document.createElement("div");
+                $(number).addClass('number');
                 // nummers
                 if (row == 0) {
-                    let number = document.createElement("div");
-                    $(number).addClass('number');
                     number.innerHTML = `${column + 1}`;
                     number.style.gridArea = `r${row}-c${column + 1}`;
-                    board.appendChild(number);
-                } 
+                }
                 // letters
                 else if (column == 0) {
-                    let number = document.createElement("div");
-                    $(number).addClass('number');
                     number.innerHTML = `${String.fromCharCode(64 + row)}`; // ascii code
                     number.style.gridArea = `r${row}-c${column}`;
-                    board.appendChild(number);
                 }
+                board.appendChild(number);
             }
         }
+    };
+
+    const _placeChip = function (tile) {
+        $(tile).off("click");
+        const chip = document.createElement("figure");
+        $(chip).addClass("fiche fiche-black");
+        tile.appendChild(chip)
     };
 
     return {
@@ -156,7 +161,7 @@ Game.Model = (() => {
 
         //controle of ontvangen data valide is
         if (state !== 0 && state !== 1 && state !== 2) {
-            throw new Error("Geen valide state!");
+            //throw new Error("Geen valide state!");
         }
 
         return state;

@@ -18,4 +18,4 @@ const sass = function (serverProjectPath, files_sass) {
     }
 };
 
-exports.sass = sass;  
+exports.sass = sass;
