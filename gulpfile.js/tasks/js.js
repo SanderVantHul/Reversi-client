@@ -4,7 +4,7 @@ const order = require('gulp-order');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
-const fn = function (filesJs, filesJsOrder, backendPath) {
+const fn = function (backendPath, filesJs, filesJsOrder) {
     return function () {
 
         //console.log(`Taak js is uitgevoerd, ${voornaam}!`);
@@ -17,7 +17,7 @@ const fn = function (filesJs, filesJsOrder, backendPath) {
             .pipe(uglify({compress: true})) 
             // 3. stop alle files in 1 file 
             .pipe(concat('app.js'))
-            // 4. compile js
+            // 4. compile js // verouderd dus shit
             // .pipe(babel({
             //     presets: ['@babel/preset-env']
             // }))

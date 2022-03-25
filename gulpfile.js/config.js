@@ -13,14 +13,18 @@ module.exports = {
             './css/*.scss',
             './css/*.css',
         ], 
-        sassOrder: [
-            'board.scss',
-            'fiche.scss',
-            'feedbackwidget.css',
-        ],
         html: [
-            './*.html'
-        ]
+            './index.html'
+        ],
+        vendor: [
+            
+        ],
+        handleBars: [
+            './templates/**/[^_]*.hbs'
+        ],
+        handleBarsPartials: [
+            './templates/**/_*.hbs'
+        ],
     },
     voornaam: 'Sander'
 };

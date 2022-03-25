@@ -70,8 +70,9 @@ Game.Reversi = (() => {
 
     const _placeChip = function (tile) {
         $(tile).off("click");
-        const chip = document.createElement("figure");
-        $(chip).addClass("fiche fiche-black");
+        // const chip = document.createElement("figure");
+        // $(chip).addClass("fiche fiche-black");
+        spa_templates.templates.FeedbackWidget.body({color: "white"});
         tile.appendChild(chip)
     };
 
