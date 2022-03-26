@@ -43,7 +43,7 @@ const hbs = function (serverProjectPath, filesHbs, filesHbsPartials) {
                 }
             }));
 
-        return merge(partials, templates)
+        return merge(partials, templates, src('./templates/**/*.js')) // add helper functions
             .pipe(concat('templates.js'))
             .pipe(dest('dist/js/'));
     };

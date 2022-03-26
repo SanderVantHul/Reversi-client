@@ -4,7 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     display: grid;
-    gap: 0.3rem;
+    gap: 2px;
     width: 500px;
     height: 500px;
     background: black;
@@ -23,13 +23,55 @@
 }
 
 .tile {
-    background: green;
     transition: all 200ms ease;
     border-radius: 5%;
+    perspective: 1000px;
 
-    &:hover {
-        background: greenyellow;
+    /* This container is needed to position the front and back side */
+    &-inner {
+        position: relative;
+        border-radius: 5%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.2s ease;
+        transform-style: preserve-3d;
+    }
+
+    /* Do a horizontal flip when you move the mouse over the flip box container */
+    &:hover &-inner {
+        //transform: rotateY(180deg);
         transform: scale(1.1) perspective(1px);
+        //background-color: yellowgreen;
+    }
+
+    &-front:hover {
+        background-color: yellowgreen;
+    }
+
+    /* Position the front and back side */
+    &-front,
+    &-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari */
+        backface-visibility: hidden;
+    }
+
+    /* Style the front side (fallback if image is missing) */
+    &-front {
+        border-radius: 5%;
+        background-color: green;
+        color: black;
+    }
+
+    /* Style the back side */
+    &-back {
+        border-radius: 5%;
+        background-color: green;
+        color: white;
+        transform: rotateY(180deg);
     }
 }
 

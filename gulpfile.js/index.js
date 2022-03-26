@@ -14,7 +14,8 @@ html.displayName = 'html';
 const vendor = require('./tasks/vendor').vendor(config.localServerProjectPath, config.files.vendor);
 vendor.displayName = 'vendor';
 
-const hbs = require('./tasks/templates').hbs(config.localServerProjectPath, config.files.handleBars, config.files.handleBarsPartials);
+const hbs = require('./tasks/templates').hbs(config.localServerProjectPath, config.files.handleBars, 
+    config.files.handleBarsPartials);
 hbs.displayName = 'hbs';
 
 const hello = function (done) {

@@ -31,7 +31,7 @@ Game.Reversi = (() => {
     };
 
     const _init = function () {
-        _makeBoard();
+        //_makeBoard();
     };
 
     const _makeBoard = function () {
@@ -173,4 +173,19 @@ Game.Model = (() => {
         getWeather: _getWeather,
         getGameState: _getGameState
     };
+})();
+
+Game.Template = (() => {
+    const _getTemplate = function (templateName) {
+        return spa_templates.templates[templateName];
+    };
+
+    const parseTemplate = function (templateName, data) {
+        return _getTemplate(templateName)(data);
+    };
+
+    return {
+        parseTemplate,
+    };
+
 })();
