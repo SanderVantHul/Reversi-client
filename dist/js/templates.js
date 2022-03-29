@@ -1,11 +1,19 @@
 // deze helper functie geeft de mogelijkheid om optellingen in de {{each}} loop
 // van de handlebars board template te doen
-Handlebars.registerHelper("addCell", function(index, number) {
+Handlebars.registerHelper("addCell", function (index, number) {
   return index + number;
 });
 
-Handlebars.registerHelper("getColor", function(number) {
-  return (number == 1 || number == 3) ? "white" : "black";
+Handlebars.registerHelper("getColor", function (number) {
+  return (number === 1 || number === 3) ? "white" : "black";
+});
+
+Handlebars.registerHelper("notFiveOrZero", function (number) {
+  return number !== 0 && number !== 5;
+});
+
+Handlebars.registerHelper("equalToFive", function (number) {
+  return number === 5;
 });
 
 Handlebars.registerPartial("fiche", Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -30,7 +38,7 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
         return undefined
     };
 
-  return ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":4,"column":4},"end":{"line":14,"column":13}}})) != null ? stack1 : "");
+  return ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":4,"column":4},"end":{"line":17,"column":13}}})) != null ? stack1 : "");
 },"2":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -39,18 +47,22 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
         return undefined
     };
 
-  return "    <div class=\"tile\" style=\"grid-area:r"
-    + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(data && lookupProperty(data,"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":5,"column":40},"end":{"line":5,"column":60}}}))
+  return "    <div class=\"tile\"\r\n        style=\"grid-area:r"
+    + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(data && lookupProperty(data,"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":6,"column":26},"end":{"line":6,"column":46}}}))
     + "-c"
-    + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(container.data(data, 1) && lookupProperty(container.data(data, 1),"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":5,"column":62},"end":{"line":5,"column":85}}}))
-    + "; "
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,depth0,{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":5,"column":87},"end":{"line":5,"column":129}}})) != null ? stack1 : "")
-    + "\">\r\n        <div class=\"tile-inner\">\r\n            <div class=\"tile-front\"></div>\r\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,depth0,{"name":"if","hash":{},"fn":container.program(5, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":8,"column":12},"end":{"line":10,"column":19}}})) != null ? stack1 : "")
+    + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(container.data(data, 1) && lookupProperty(container.data(data, 1),"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":6,"column":48},"end":{"line":6,"column":71}}}))
+    + "; \r\n        "
+    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(lookupProperty(helpers,"equalToFive")||(depth0 && lookupProperty(depth0,"equalToFive"))||alias2).call(alias1,depth0,{"name":"equalToFive","hash":{},"data":data,"loc":{"start":{"line":7,"column":18},"end":{"line":7,"column":36}}}),{"name":"unless","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":8},"end":{"line":7,"column":72}}})) != null ? stack1 : "")
+    + "\">\r\n        <div class=\"tile-inner\">\r\n            <div class=\"tile-front\" style=\""
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"equalToFive")||(depth0 && lookupProperty(depth0,"equalToFive"))||alias2).call(alias1,depth0,{"name":"equalToFive","hash":{},"data":data,"loc":{"start":{"line":9,"column":49},"end":{"line":9,"column":67}}}),{"name":"if","hash":{},"fn":container.program(5, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":9,"column":43},"end":{"line":9,"column":106}}})) != null ? stack1 : "")
+    + "\"></div>\r\n"
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"notFiveOrZero")||(depth0 && lookupProperty(depth0,"notFiveOrZero"))||alias2).call(alias1,depth0,{"name":"notFiveOrZero","hash":{},"data":data,"loc":{"start":{"line":11,"column":18},"end":{"line":11,"column":38}}}),{"name":"if","hash":{},"fn":container.program(7, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":11,"column":12},"end":{"line":13,"column":19}}})) != null ? stack1 : "")
     + "            <div class=\"tile-back\"></div>\r\n        </div>\r\n    </div>\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
     return " pointer-events: none; ";
 },"5":function(container,depth0,helpers,partials,data) {
+    return "background-color: yellowGreen;";
+},"7":function(container,depth0,helpers,partials,data) {
     var lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -58,8 +70,8 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
         return undefined
     };
 
-  return "                <figure class=\"fiche fiche-"
-    + container.escapeExpression((lookupProperty(helpers,"getColor")||(depth0 && lookupProperty(depth0,"getColor"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"getColor","hash":{},"data":data,"loc":{"start":{"line":9,"column":43},"end":{"line":9,"column":60}}}))
+  return "            <figure class=\"fiche fiche-"
+    + container.escapeExpression((lookupProperty(helpers,"getColor")||(depth0 && lookupProperty(depth0,"getColor"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"getColor","hash":{},"data":data,"loc":{"start":{"line":12,"column":39},"end":{"line":12,"column":56}}}))
     + "\"></figure>\r\n";
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -70,7 +82,7 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
     };
 
   return "<div class=\"board\">\r\n    <!-- tiles -->\r\n"
-    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":4},"end":{"line":15,"column":13}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"each").call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":3,"column":4},"end":{"line":18,"column":13}}})) != null ? stack1 : "")
     + "</div>";
 },"useData":true,"useDepths":true});
 this["spa_templates"]["templates"]["feedbackWidget"] = this["spa_templates"]["templates"]["feedbackWidget"] || {};

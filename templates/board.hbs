@@ -3,11 +3,12 @@
     {{#each this}}
     {{#each this}}
     <div class="tile"
-        style="grid-area:r{{addCell @index 1}}-c{{addCell @../index 1}}; {{#if this}} pointer-events: none; {{/if}}">
+        style="grid-area:r{{addCell @index 1}}-c{{addCell @../index 1}}; 
+        {{#unless (equalToFive this)}} pointer-events: none; {{/unless}}">
         <div class="tile-inner">
-            <div class="tile-front"></div>
-            <!-- als de 'this' waarde 0 is, oftewel geen fiche, dan is dit false en wordt er geen fiche toegevoegd -->
-            {{#if this}}
+            <div class="tile-front" style="{{#if (equalToFive this)}}background-color: yellowGreen;{{/if}}"></div>
+            {{! als de 'this' waarde 0 is of 5, oftewel geen fiche, dan is dit false en wordt er geen fiche toegevoegd }}
+            {{#if (notFiveOrZero this)}}
             <figure class="fiche fiche-{{getColor this}}"></figure>
             {{/if}}
             <div class="tile-back"></div>

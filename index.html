@@ -23,7 +23,7 @@
     <script src="dist/js/app.js"></script>
     <script src="vendor/handlebars-v4.7.7.js"></script>
     <script src="dist/js/templates.js"></script>
-    
+
 </head>
 
 <body>
@@ -35,9 +35,13 @@
         function afterInit() {
             //Game.Model.getWeather();
             //Game.Data.get("api/Spel/Beurt");
+            $('body').append(Game.Template.parseTemplate("board", [[0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 5, 1, 2, 0, 0, 0], [0, 0, 0, 2, 1, 5, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]]));
         }
 
-        $('body').append(Game.Template.parseTemplate("board", [[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,1,2,0,0,0],[0,0,0,2,1,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]))
     </script>
 
     <!-- <figure class="fiche fiche-white"></figure>

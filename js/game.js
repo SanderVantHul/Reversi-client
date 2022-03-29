@@ -31,53 +31,54 @@ Game.Reversi = (() => {
     };
 
     const _init = function () {
-        //_makeBoard();
+        //_makeBoard();  // oude implementatie van bord
     };
 
-    const _makeBoard = function () {
-        const board = document.getElementsByClassName("board")[0];
+    // const _makeBoard = function () {
+    //     const board = document.getElementsByClassName("board")[0];
 
-        // tiles toevoegen aan bord
-        for (let row = 1; row < 9; row++) {
-            for (let column = 1; column < 9; column++) {
-                let tile = document.createElement("div");
-                $(tile).addClass('tile');
-                tile.style.gridArea = `r${row}-c${column}`;
-                $(tile).click(function () { _placeChip(tile); });
-                board.appendChild(tile);
-            };
-        };
+    //     // tiles toevoegen aan bord
+    //     for (let row = 1; row < 9; row++) {
+    //         for (let column = 1; column < 9; column++) {
+    //             let tile = document.createElement("div");
+    //             $(tile).addClass('tile');
+    //             tile.style.gridArea = `r${row}-c${column}`;
+    //             $(tile).click(function () { _placeChip(tile); });
+    //             board.appendChild(tile);
+    //         };
+    //     };
 
-        // nummers en letters toevoegen aan bord
-        for (let row = 0; row < 9; row++) {
-            for (let column = 0; column < 8; column++) {
-                const number = document.createElement("div");
-                $(number).addClass('number');
-                // nummers
-                if (row == 0) {
-                    number.innerHTML = `${column + 1}`;
-                    number.style.gridArea = `r${row}-c${column + 1}`;
-                }
-                // letters
-                else if (column == 0) {
-                    number.innerHTML = `${String.fromCharCode(64 + row)}`; // ascii code
-                    number.style.gridArea = `r${row}-c${column}`;
-                }
-                board.appendChild(number);
-            }
-        }
-    };
+    //     // nummers en letters toevoegen aan bord
+    //     for (let row = 0; row < 9; row++) {
+    //         for (let column = 0; column < 8; column++) {
+    //             const number = document.createElement("div");
+    //             $(number).addClass('number');
+    //             // nummers
+    //             if (row == 0) {
+    //                 number.innerHTML = `${column + 1}`;
+    //                 number.style.gridArea = `r${row}-c${column + 1}`;
+    //             }
+    //             // letters
+    //             else if (column == 0) {
+    //                 number.innerHTML = `${String.fromCharCode(64 + row)}`; // ascii code
+    //                 number.style.gridArea = `r${row}-c${column}`;
+    //             }
+    //             board.appendChild(number);
+    //         }
+    //     }
+    // };
 
-    const _placeChip = function (tile) {
-        $(tile).off("click");
+    const placeChip = function (rij, kolom) {
+        // $(this).off("click");
         // const chip = document.createElement("figure");
         // $(chip).addClass("fiche fiche-black");
-        spa_templates.templates.FeedbackWidget.body({color: "white"});
-        tile.appendChild(chip)
+        // this.appendChild(chip)
+        Game.API.doeZet(rij, kolom);
     };
 
     return {
-        init: _init
+        init: _init,
+        placeChip
     };
 })();
 
@@ -188,4 +189,36 @@ Game.Template = (() => {
         parseTemplate,
     };
 
+})();
+
+Game.API = (() => {
+    let _configmap = {
+        spelToken: 0,
+        spelerToken: 0
+    };
+    const init = function (spelToken, spelerToken) {
+        _configmap.spelToken = spelToken;
+        _configmap.spelerToken = spelerToken;
+        console.log(_configmap.spelToken + " " + _configmap.spelerToken);
+    };
+
+    const doeZet = function (rij, kolom) {
+        $.ajax({
+            url: `/api/Spel/Zet/${rij}/${kolom}`,
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "spelerToken": `${_configmap.spelerToken}`,
+                "spelToken": `${_configmap.spelToken}`
+            }),
+            success: function (response) {
+                console.log("Zet goed");
+            }
+        });
+    };
+
+    return {
+        init,
+        doeZet
+    };
 })();

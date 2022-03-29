@@ -1,12 +1,17 @@
 .fiche {
+    --background: linear-gradient(
+        45deg,
+        black,
+        white
+    );
     border-radius: 50%;
     width: 80%;
     height: 80%;
     position: relative;
     top: 10%;
     left: 10%;
-    animation: fadeIn 300ms,
-               shine 4800ms cubic-bezier(.12, .89, .98, .47);
+    animation: fadeIn 300ms;
+               //shine 4800ms cubic-bezier(.12, .89, .98, .47);
 
     &-black {
         outline: solid white 2px;
