@@ -15,3 +15,11 @@ Handlebars.registerHelper("notFiveOrZero", function (number) {
 Handlebars.registerHelper("equalToFive", function (number) {
   return number === 5;
 });
+
+Handlebars.registerHelper("newFiche", function (number) {
+  return number === 3 || number === 4;
+});
+
+Handlebars.registerHelper("getAnimation", function (number) {
+  return number === 3 ? "animationWhite" : "animationBlack";
+});

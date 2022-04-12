@@ -16,6 +16,14 @@ Handlebars.registerHelper("equalToFive", function (number) {
   return number === 5;
 });
 
+Handlebars.registerHelper("newFiche", function (number) {
+  return number === 3 || number === 4;
+});
+
+Handlebars.registerHelper("getAnimation", function (number) {
+  return number === 3 ? "animationWhite" : "animationBlack";
+});
+
 Handlebars.registerPartial("fiche", Handlebars.template({"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -51,7 +59,7 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
     + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(data && lookupProperty(data,"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":6,"column":26},"end":{"line":6,"column":46}}}))
     + "-c"
     + alias3((lookupProperty(helpers,"addCell")||(depth0 && lookupProperty(depth0,"addCell"))||alias2).call(alias1,(container.data(data, 1) && lookupProperty(container.data(data, 1),"index")),1,{"name":"addCell","hash":{},"data":data,"loc":{"start":{"line":6,"column":48},"end":{"line":6,"column":71}}}))
-    + "; \r\n        "
+    + ";\r\n        "
     + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(lookupProperty(helpers,"equalToFive")||(depth0 && lookupProperty(depth0,"equalToFive"))||alias2).call(alias1,depth0,{"name":"equalToFive","hash":{},"data":data,"loc":{"start":{"line":7,"column":18},"end":{"line":7,"column":36}}}),{"name":"unless","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":7,"column":8},"end":{"line":7,"column":72}}})) != null ? stack1 : "")
     + "\">\r\n        <div class=\"tile-inner\">\r\n            <div class=\"tile-front\" style=\""
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"equalToFive")||(depth0 && lookupProperty(depth0,"equalToFive"))||alias2).call(alias1,depth0,{"name":"equalToFive","hash":{},"data":data,"loc":{"start":{"line":9,"column":49},"end":{"line":9,"column":67}}}),{"name":"if","hash":{},"fn":container.program(5, data, 0, blockParams, depths),"inverse":container.noop,"data":data,"loc":{"start":{"line":9,"column":43},"end":{"line":9,"column":106}}})) != null ? stack1 : "")
@@ -63,7 +71,7 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
 },"5":function(container,depth0,helpers,partials,data) {
     return "background-color: yellowGreen;";
 },"7":function(container,depth0,helpers,partials,data) {
-    var lookupProperty = container.lookupProperty || function(parent, propertyName) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
         }
@@ -71,8 +79,20 @@ this["spa_templates"]["templates"]["board"] = Handlebars.template({"1":function(
     };
 
   return "            <figure class=\"fiche fiche-"
-    + container.escapeExpression((lookupProperty(helpers,"getColor")||(depth0 && lookupProperty(depth0,"getColor"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"getColor","hash":{},"data":data,"loc":{"start":{"line":12,"column":39},"end":{"line":12,"column":56}}}))
+    + container.escapeExpression((lookupProperty(helpers,"getColor")||(depth0 && lookupProperty(depth0,"getColor"))||alias2).call(alias1,depth0,{"name":"getColor","hash":{},"data":data,"loc":{"start":{"line":12,"column":39},"end":{"line":12,"column":56}}}))
+    + " "
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(lookupProperty(helpers,"newFiche")||(depth0 && lookupProperty(depth0,"newFiche"))||alias2).call(alias1,depth0,{"name":"newFiche","hash":{},"data":data,"loc":{"start":{"line":12,"column":63},"end":{"line":12,"column":78}}}),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":12,"column":57},"end":{"line":12,"column":114}}})) != null ? stack1 : "")
     + "\"></figure>\r\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    var lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "fiche-"
+    + container.escapeExpression((lookupProperty(helpers,"getAnimation")||(depth0 && lookupProperty(depth0,"getAnimation"))||container.hooks.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),depth0,{"name":"getAnimation","hash":{},"data":data,"loc":{"start":{"line":12,"column":86},"end":{"line":12,"column":107}}}));
 },"compiler":[8,">= 4.3.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {

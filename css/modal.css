@@ -1,0 +1,31 @@
+.modalWin {
+    max-width: 60ch;
+}
+
+.modalWin::backdrop {
+    background: linear-gradient(45deg, rgb(0, 101, 0), rgb(20, 235, 192));
+    background-size: 400%;
+    opacity: .6;
+    animation: backdropAnimation 15s infinite alternate;
+}
+
+.modalLost {
+    max-width: 60ch;
+}
+
+.modalLost::backdrop {
+    background: linear-gradient(45deg, rgb(84, 1, 1), red);
+    background-size: 400%;
+    opacity: .6;
+    animation: backdropAnimation 15s infinite alternate;
+}
+
+@keyframes backdropAnimation {
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
+}

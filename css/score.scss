@@ -1,0 +1,50 @@
+.scoreWhite {
+    border: 3px solid black;
+    border-radius: 8%;
+    width: 150px;
+    height: 70px;
+    position: fixed;
+    bottom: 60px;
+    left: 100px;
+    margin: 5px;
+
+    &-number {
+        float: right;
+        font-size: 50px;
+        position: relative;
+        bottom: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    &-chip {
+        position: relative;
+        float: right;
+        font-size: 40px;
+    }
+}
+
+.scoreBlack {
+    border: 3px solid black;
+    border-radius: 8%;
+    width: 150px;
+    height: 70px;
+    position: fixed;
+    right: 100px;
+    top: 60px;
+    margin: 5px;
+
+    &-number {
+        float: right;
+        position: relative;
+        bottom: 5px;
+        font-size: 50px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    &-chip {
+        position: relative;
+        float: right;
+        font-size: 40px;
+    }
+}
+
