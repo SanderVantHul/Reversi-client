@@ -22,6 +22,7 @@
     <!-- <script src="js/game.js"></script> -->
     <script src="dist/js/app.js"></script>
     <script src="vendor/handlebars-v4.7.7.js"></script>
+    <script src="vendor/chartjs/dist/chart.min.js"></script>
     <script src="dist/js/templates.js"></script>
 
 </head>
@@ -33,16 +34,57 @@
         });
 
         function afterInit() {
+            let modal = document.getElementById("statistiekenModal");
+            modal.showModal();
+            const ctx = document.getElementById('myChart').getContext('2d');
+            Game.Stats.createChart(ctx);
+            modal.close();
             //Game.Model.getWeather();
             //Game.Data.get("api/Spel/Beurt");
-            $('body').append(Game.Template.parseTemplate("board", [[0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 5, 1, 3, 0, 0, 0], [0, 0, 0, 4, 1, 5, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]]));
+            // $('body').append(Game.Template.parseTemplate("board", [[0, 0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 5, 1, 3, 0, 0, 0], [0, 0, 0, 4, 1, 5, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0],
+            // [0, 0, 0, 0, 0, 0, 0, 0]]));
+
+            let button = document.getElementById("statsButton");
+
+            button.addEventListener("click", function (event) {
+                let modal = document.getElementById("statistiekenModal");
+                modal.showModal();
+                
+
+                const canvas = document.getElementById('myChart');
+
+                function isCanvasBlank(canvas) {
+                    const context = canvas.getContext('2d');
+
+                    const pixelBuffer = new Uint32Array(
+                        context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+                    );
+
+                    return !pixelBuffer.some(color => color !== 0);
+                }
+                
+                if (isCanvasBlank(canvas)) {
+                    
+                } else {
+                    Game.Stats.updateChart();
+                }
+                event.preventDefault();
+            });
+
         }
 
     </script>
+
+    <button id="statsButton" class="btn btn-info">Statistieken</button>
+
+    <button id="updateButton" class="btn btn-info">Statistieken</button>
+
+    <dialog id="statistiekenModal">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </dialog>
 
     <!-- <figure class="fiche fiche-white"></figure>
     <figure class="fiche fiche-black"></figure> -->
@@ -50,7 +92,7 @@
 
     <!-- <button id="ok">OK</button> -->
 
-    <div class="scoreWhite">
+    <!-- <div class="scoreWhite">
         <label class="scoreWhite-chip">&#9898;</label>
         <label class="scoreWhite-number">3</label>
     </div>
@@ -58,23 +100,23 @@
     <div class="scoreBlack">
         <label class="scoreBlack-chip">&#9899;</label>
         <label class="scoreBlack-number">3</label>
-    </div>
+    </div> -->
 
-    <section class="widget widget-hidden widget-success widget-fade-in" id="feedback-success">
+    <!-- <section class="widget widget-hidden widget-success widget-fade-in" id="feedback-success">
         <figure class="widget__vinkje">
-            <!-- <img class="widget__vinkje__img" src="assets/feedbackwidget/checkmark.png"> -->
+            <img class="widget__vinkje__img" src="assets/feedbackwidget/checkmark.png">
         </figure>
         <div class="widget__bericht">
             <p class="widget__bericht__text"></p>
         </div>
         <figure class="widget__kruisje">
-            <!-- <input type="image" id="close" src="assets/feedbackwidget/cancel.png" /> -->
+            <input type="image" id="close" src="assets/feedbackwidget/cancel.png" />
         </figure>
         <button class="widget__button widget__accepteer bibber">Accepteren</button>
         <button class="widget__button widget__weiger">Weigeren</button>
     </section>
 
-    <section id="feedback-danger" style="display:none"></section>
+    <section id="feedback-danger" style="display:none"></section> -->
 
 </body>
 

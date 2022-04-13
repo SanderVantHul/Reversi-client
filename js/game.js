@@ -15,9 +15,10 @@ const Game = ((url) => {
         }, 2000);
     };
 
-    const _init = function (afterInit) {
+    const _init = function (afterInit, ctx) {
         _getCurrentGameState();
         Game.Reversi.init();
+        Game.Stats.init(ctx);
         afterInit();
     };
 
@@ -220,5 +221,56 @@ Game.API = (() => {
     return {
         init,
         doeZet
+    };
+})();
+
+Game.Stats = (() => {
+    let _configmap = {
+        chart: null
+    };
+    const init = function () {
+
+    };
+
+    const createChart = function (ctx) {
+        const labels = [];
+        for (let i = 0; i < 64; ++i) {
+            labels.push(i.toString());
+        }
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Zwart',
+                        data: [2],
+                        borderColor: 'rgb(135,206,235)',
+                        backgroundColor: 'rgb(135,206,235)',
+                    },
+                    {
+                        label: 'Wit',
+                        data: [2],
+                        borderColor: 'rgb(255, 0, 0)',
+                        backgroundColor: 'rgb(255, 0, 0)',
+                    }
+                ]
+            },
+            
+        });
+        _configmap.chart = myChart;
+    };
+
+    const updateChart = function (zwart, wit) {
+        let chart = _configmap.chart;
+        chart.data.datasets[0].data.push(zwart);
+        chart.data.datasets[1].data.push(wit);
+        chart.update();
+    };
+
+    return {
+        init,
+        createChart,
+        updateChart
     };
 })();
